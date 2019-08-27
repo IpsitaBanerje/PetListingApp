@@ -19,7 +19,7 @@ class NetworkPeopleListDataSourceImpl(
     override suspend fun fetchPeopleList() {
         try{
             val peopleList = peopleAndPetService
-                    .getPeopleList()
+                    .getPeopleListAsync()
                     .await()
             _fetchedPeopleList.postValue(peopleList)
         }

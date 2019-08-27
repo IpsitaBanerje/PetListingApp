@@ -12,5 +12,5 @@ data class People(
     /**
      * List of [Pet] owned by the [People] object
      */
-    val pets: List<Pet>
+    val pets: List<Pet> = ArrayList()
 )

@@ -20,11 +20,10 @@ class PeopleAndPetRepositoryImpl(
      * Gets the list of [People] object
      * @return [LiveData] of [List] of [People] object
      */
-    override suspend fun getPeopleList():LiveData<out List<People>> {
-
-        return withContext(Dispatchers.IO){
+    override suspend fun getFetchedPeopleList():LiveData<out List<People>> {
+        return withContext(Dispatchers.IO) {
+            networkPeopleListDataSource.fetchPeopleList()
             return@withContext networkPeopleListDataSource.fetchedPeopleList
         }
-
     }
 }

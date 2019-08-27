@@ -15,7 +15,13 @@ class PeopleViewModel(
     /**
      * Gets list of [People] object
     */
-    val peopleList by lazyAndDeferred {
-        peopleAndPetRepository.getPeopleList()
+   /* val peopleList by lazyAndDeferred {
+        peopleAndPetRepository.getFetchedPeopleList()
     }
+*/
+
+    val peopleList by lazyAndDeferred{
+        peopleAndPetRepository.getFetchedPeopleList()
+    }
+
 }

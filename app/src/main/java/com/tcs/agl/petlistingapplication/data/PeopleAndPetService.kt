@@ -15,7 +15,7 @@ import retrofit2.http.GET
 interface PeopleAndPetService {
 
     @GET("people.json")
-    fun getPeopleList( ):Deferred<List<People>>
+    fun getPeopleListAsync( ):Deferred<List<People>>
 
     companion object{
         /**
