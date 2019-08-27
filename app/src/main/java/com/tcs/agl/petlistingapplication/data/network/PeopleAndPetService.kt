@@ -1,8 +1,7 @@
-package com.tcs.agl.petlistingapplication.data
+package com.tcs.agl.petlistingapplication.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.tcs.agl.petlistingapplication.data.model.People
-import com.tcs.agl.petlistingapplication.data.network.ConnectivityInterceptor
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,17 +14,17 @@ import retrofit2.http.GET
 interface PeopleAndPetService {
 
     @GET("people.json")
-    fun getPeopleListAsync( ):Deferred<List<People>>
+    fun getPeopleListAsync(): Deferred<List<People>>
 
-    companion object{
+    companion object {
         /**
-         * Fetches response from the JSON service
+         * Get the [Retrofit] library ready
          * @property connectivityInterceptor is interface for intercepting connectivity related concerns
          */
         operator fun invoke(
                 connectivityInterceptor: ConnectivityInterceptor
-        ) : PeopleAndPetService{
-            val okHttpClient= OkHttpClient.Builder()
+        ): PeopleAndPetService {
+            val okHttpClient = OkHttpClient.Builder()
                     .addInterceptor(connectivityInterceptor)
                     .build()
 

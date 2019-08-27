@@ -1,4 +1,4 @@
-package com.tcs.agl.petlistingapplication.data
+package com.tcs.agl.petlistingapplication.data.repository
 
 import androidx.lifecycle.LiveData
 import com.tcs.agl.petlistingapplication.data.model.People
@@ -20,7 +20,7 @@ class PeopleAndPetRepositoryImpl(
      * Gets the list of [People] object
      * @return [LiveData] of [List] of [People] object
      */
-    override suspend fun getFetchedPeopleList():LiveData<out List<People>> {
+    override suspend fun getFetchedPeopleList(): LiveData<out List<People>> {
         return withContext(Dispatchers.IO) {
             networkPeopleListDataSource.fetchPeopleList()
             return@withContext networkPeopleListDataSource.fetchedPeopleList

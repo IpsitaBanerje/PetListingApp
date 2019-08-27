@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PetListingApplication</string>
+    <string name="app_name">Pet Sorter</string>
 
     <string name="data_unavailable">Data unavailable!</string>
     <string name="loading">Loading</string>

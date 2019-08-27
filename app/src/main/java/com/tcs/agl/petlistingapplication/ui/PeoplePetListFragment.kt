@@ -12,6 +12,8 @@ import androidx.core.text.bold
 import androidx.lifecycle.Observer
 import com.tcs.agl.petlistingapplication.data.model.People
 import com.tcs.agl.petlistingapplication.data.model.Pet
+import com.tcs.agl.petlistingapplication.ui.viewmodel.PeopleViewModel
+import com.tcs.agl.petlistingapplication.ui.viewmodel.PeopleViewModelFactory
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -22,10 +24,8 @@ private const val NEW_LINE= "\n"
 /**
  * Inherits [ScopedLaunchFragment] and implements [KodeinAware]
  * Binds data with UI objects
- *
  */
-
-class PeoplePetListLaunchFragment : ScopedLaunchFragment(), KodeinAware {
+class PeoplePetListFragment : ScopedLaunchFragment(), KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModelFactory: PeopleViewModelFactory by instance()
@@ -43,7 +43,6 @@ class PeoplePetListLaunchFragment : ScopedLaunchFragment(), KodeinAware {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(PeopleViewModel::class.java)
-
         bindUI()
     }
 
@@ -54,7 +53,7 @@ class PeoplePetListLaunchFragment : ScopedLaunchFragment(), KodeinAware {
     private fun bindUI() = launch {
         val peopleListData = viewModel.peopleList.await()
 
-        peopleListData.observe(this@PeoplePetListLaunchFragment, Observer {
+        peopleListData.observe(this@PeoplePetListFragment, Observer {
             if (it == null) return@Observer
 
             group_loading.visibility = View.GONE
@@ -63,6 +62,10 @@ class PeoplePetListLaunchFragment : ScopedLaunchFragment(), KodeinAware {
         })
     }
 
+    /**
+     * Gets formatted output for UI and sets it to TextView
+     * @property [List] of [People]
+     */
     private fun generateOutputAndUpdateUI(peopleList: List<People>) {
         val result =getFormattedOutputFromGenderToCatListHashMap(getGenderToCatListHashMap(peopleList))
         if (peopleList.isNullOrEmpty() || result.isEmpty()){
@@ -72,7 +75,11 @@ class PeoplePetListLaunchFragment : ScopedLaunchFragment(), KodeinAware {
             textView_pet_list.text = result
     }
 
-    private fun getGenderToCatListHashMap(peopleList: List<People>): java.util.HashMap<String, java.util.ArrayList<String>> {
+    /**
+     * Creates [HashMap] of [String] keys for [People.gender] and [ArrayList]of [String] as value for [Pet.name]
+     * @property [List] of [People] obtained
+     */
+    fun getGenderToCatListHashMap(peopleList: List<People>): java.util.HashMap<String, java.util.ArrayList<String>> {
         val genderToPetHashMap: HashMap<String, ArrayList<String>> = HashMap()
 
         for (people in peopleList){
@@ -90,6 +97,11 @@ class PeoplePetListLaunchFragment : ScopedLaunchFragment(), KodeinAware {
         return genderToPetHashMap
     }
 
+    /**
+     * Gives output in required format
+     * @property [HashMap] of [String] and [ArrayList]
+     * @return [SpannableStringBuilder]
+     */
     private fun getFormattedOutputFromGenderToCatListHashMap(genderToPetHashMap: java.util.HashMap<String, java.util.ArrayList<String>>): SpannableStringBuilder {
         val output = SpannableStringBuilder("")
 

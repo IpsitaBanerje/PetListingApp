@@ -1,7 +1,8 @@
-package com.tcs.agl.petlistingapplication
+package com.tcs.agl.petlistingapplication.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.tcs.agl.petlistingapplication.R
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 

@@ -1,7 +1,6 @@
 package com.tcs.agl.petlistingapplication.data.network
 
 import okhttp3.Interceptor
-import  com.tcs.agl.petlistingapplication.data.PeopleAndPetService
 
 /**
  *
@@ -9,4 +8,4 @@ import  com.tcs.agl.petlistingapplication.data.PeopleAndPetService
  * for implementing dependency injection
  * This interface is implemented by [ConnectivityInterceptorImpl]
  */
-interface ConnectivityInterceptor :Interceptor
+interface ConnectivityInterceptor : Interceptor

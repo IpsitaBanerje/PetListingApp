@@ -1,4 +1,4 @@
-package com.tcs.agl.petlistingapplication.data
+package com.tcs.agl.petlistingapplication.data.repository
 
 import androidx.lifecycle.LiveData
 import com.tcs.agl.petlistingapplication.data.model.People

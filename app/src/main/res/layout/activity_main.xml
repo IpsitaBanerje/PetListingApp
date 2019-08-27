@@ -5,11 +5,11 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
-tools:context=".PetListActivity">
+tools:context=".ui.PetListActivity">
 <fragment
     android:id="@+id/pet_list_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    class="com.tcs.agl.petlistingapplication.ui.PeoplePetListLaunchFragment"
+    class="com.tcs.agl.petlistingapplication.ui.PeoplePetListFragment"
   />
 </LinearLayout>

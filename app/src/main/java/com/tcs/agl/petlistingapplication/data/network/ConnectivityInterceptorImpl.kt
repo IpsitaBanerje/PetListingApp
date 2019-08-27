@@ -14,17 +14,25 @@ class ConnectivityInterceptorImpl(
         context: Context
 ) : ConnectivityInterceptor {
 
-    private val applicationContext= context.applicationContext
+    private val applicationContext = context.applicationContext
 
+    /**
+     * Implements [intercept] to check for connectivity
+     * @throws [ConnectivityUnavailableException] if Internet connectivity is unavailable
+     */
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isNetworkAvailable())
             throw ConnectivityUnavailableException()
         return chain.proceed(chain.request())
     }
 
-    private fun isNetworkAvailable() : Boolean {
+    /**
+     * Checks if network is available and returns [Boolean] after checking networkInfo
+     * @return [Boolean] true if available and false if not
+     */
+    private fun isNetworkAvailable(): Boolean {
         val connectivityServiceManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityServiceManager.activeNetworkInfo
-        return  activeNetworkInfo !=null && activeNetworkInfo.isConnected
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 }
